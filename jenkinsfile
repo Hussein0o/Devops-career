@@ -1,34 +1,55 @@
 pipeline {
     agent any
-    environment {
-        DOCKERHUB_CREDENTIALS = credentials('docker-hub-credentials')
-    }
+
     stages {
-        stage('Build') {
+        stage('build') {
             steps {
-                script {
-                    docker.build('my-app/frontend', './frontend')
-                    docker.build('my-app/backend', './backend')
+                sh "echo 'Building....'"
+                sh "docker build -t husseino0/devops-career:backend-3.1.${env.BUILD_NUMBER} bac:kend-flask/"
+                sh "docker build -t husseino0/devops-career:frontend-1.${env.BUILD_NUMBER} frontend-html/"
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'docker-cred', 
+                        usernameVariable: 'USER', 
+                        passwordVariable: 'PASS'
+                    )
+                ]) {
+                    sh "echo $PASS | docker login -u $USER --password-stdin"
+                    sh "docker push husseino0/devops-career:backend-3.1.${env.BUILD_NUMBER}"
+                    sh "docker push husseino0/devops-career:frontend-1.${env.BUILD_NUMBER}"
                 }
             }
         }
-        stage('Push') {
+        stage('test') {
             steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'DOCKERHUB_CREDENTIALS') {
-                        docker.image('my-app/frontend').push('latest')
-                        docker.image('my-app/backend').push('latest')
-                    }
-                }
+                sh "echo 'Testing....'"
+                sh "echo 'Some testing scripts'"
+            }
+        } 
+        stage('deploy') {
+            steps {
+                sh "echo 'Deploying....'"
+                sh "sed -i 's|image: .*\$|image: husseino0/devops-career:backend-3.1.${env.BUILD_NUMBER}|' k8s-manifests/backend-deployment.yml"
+                sh "sed -i 's|image: .*\$|image: husseino0/devops-career:frontend-1.${env.BUILD_NUMBER}|' k8s-manifests/frontend-deployment.yml"
             }
         }
-        stage('Deploy') {
+        stage('push') {
             steps {
-                script {
-                    sh 'kubectl apply -f k8s/'
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'git-token', 
+                        usernameVariable: 'USER', 
+                        passwordVariable: 'TOKEN'
+                    )
+                ]) {
+                    sh 'git config --global user.email "hussein@jen"'
+                    sh 'git config --global user.name "hussein"'
+                    sh 'git add .'
+                    sh 'git commit -m "Jenkins pipeline"'
+                    sh "git remote set-url origin https://${USER}:${TOKEN}@github.com/Hussein0o/Devops-career.git"
+                    sh 'git push origin HEAD:master'
                 }
             }
         }
     }
 }
-
