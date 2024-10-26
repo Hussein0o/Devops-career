@@ -5,7 +5,7 @@ pipeline {
         stage('build') {
             steps {
                 sh "echo 'Building....'"
-                sh "docker build -t husseino0/devops-career:backend-3.1.${env.BUILD_NUMBER} bac:kend-flask/"
+                sh "docker build -t husseino0/devops-career:backend-3.1.${env.BUILD_NUMBER} backend-flask/"
                 sh "docker build -t husseino0/devops-career:frontend-1.${env.BUILD_NUMBER} frontend-html/"
                 withCredentials([
                     usernamePassword(
