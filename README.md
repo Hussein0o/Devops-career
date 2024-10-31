@@ -27,13 +27,20 @@ This project implements a three-tier web application with the following componen
 
 ├── backend-flask 
 # Flask application code for the backend 
-├── database-mysql # MySQL database configuration and schema
-├── frontend-html # Static frontend files (HTML, CSS, JavaScript)
-├── jenkins-tools # Jenkins configuration files and tools 
-├── k8s-manifests # Kubernetes deployment files
-├── kind-cluster.yml # KinD cluster setup configuration 
-├── jenkinsfile # Jenkins pipeline definition 
-└── README.md # Project overview and setup instructions
+├── database-mysql 
+# MySQL database configuration and schema
+├── frontend-html 
+# Static frontend files (HTML, CSS, JavaScript)
+├── jenkins-tools 
+# Jenkins configuration files and tools 
+├── k8s-manifests 
+# Kubernetes deployment files
+├── kind-cluster.yml 
+# KinD cluster setup configuration 
+├── jenkinsfile 
+# Jenkins pipeline definition 
+└── README.md 
+# Project overview and setup instructions
 
 ### File Descriptions
 
