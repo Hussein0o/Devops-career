@@ -79,10 +79,6 @@ mysql -u root -p < schema.sql
 - **Python 3.x**: To run the Flask backend locally.
 - **Node.js and npm** (optional): If the frontend involves additional JavaScript libraries.
 
-## Installation and Setup
-
-### Step 1: Set Up the Database
-
 Navigate to `database-mysql` and load the schema into MySQL:
 
 ```bash
