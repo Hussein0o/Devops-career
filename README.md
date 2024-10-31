@@ -12,7 +12,6 @@ This project is a full-stack web application consisting of a **Flask** backend, 
 - [CI/CD Pipeline with Jenkins](#cicd-pipeline-with-jenkins)
 - [Kubernetes Deployment](#kubernetes-deployment)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Project Overview
 
@@ -84,6 +83,10 @@ mysql -u root -p < schema.sql
 Kubernetes Deployment
 
 Deployments are managed in k8s-manifests and include:
+Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request.
+
 
     Deployments: For backend, frontend, and database services.
     Services: Expose services within the cluster.
