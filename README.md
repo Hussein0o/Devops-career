@@ -25,7 +25,8 @@ This project implements a three-tier web application with the following componen
 
 ## Folder Structure
 
-├── backend-flask # Flask application code for the backend 
+├── backend-flask 
+# Flask application code for the backend 
 ├── database-mysql # MySQL database configuration and schema
 ├── frontend-html # Static frontend files (HTML, CSS, JavaScript)
 ├── jenkins-tools # Jenkins configuration files and tools 
